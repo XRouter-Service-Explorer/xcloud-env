@@ -1,0 +1,63 @@
+﻿version: "3.3"
+services:
+  snode:
+    image: blocknetdx/servicenode:latest
+    entrypoint: /opt/blockchain/start-snode.sh
+    restart: unless-stopped
+    environment:
+      PUBLIC_IP: "${PUBLIC_IP}"
+      RPC_USER: "${RPC_USER}"
+      RPC_PASSWORD: "${RPC_PASSWORD}"
+      SN_NAME: "${SN_NAME}"
+      SN_ADDRESS: "${SN_ADDRESS}"
+      SN_KEY: "${SN_KEY}"
+    volumes:
+      - snode-config:/opt/blockchain/config
+      - snode-data:/opt/blockchain/data
+      - type: bind
+        source: ./scripts
+        target: /opt/blockchain
+      - type: bind
+        source: ./plugins
+        target: /opt/blockchain/data/plugins
+    ports:
+      - "41412"
+      - "41414"
+    networks:
+      - backend
+
+  xr_proxy:
+    image: blocknetdx/exrproxy:latest
+    entrypoint: /opt/scripts/start-xrproxy.sh
+    restart: unless-stopped
+    ports: 
+      - "80:80"
+    environment:
+      RPC_USER: "${RPC_USER}"
+      RPC_PASSWORD: "${RPC_PASSWORD}"
+      SN_KEY: "${SN_KEY}"
+    volumes:
+      - xrproxy-config:/opt/uwsgi/conf
+      - xrproxy-nginx:/etc/nginx
+      - type: bind
+        source: ./scripts
+        target: /opt/scripts
+    networks:
+      - frontend
+      - backend
+
+  getpeers:
+    image:  xrouterserviceexplorer/xcloud.getpeers.api:latest
+    entrypoint: /opt/blockchain/start-getpeers.sh
+    environment:
+      COINS: "BLOCK"
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+volumes:
+  snode-config:
+  snode-data:
+  xrproxy-config:
+  xrproxy-nginx:
+  scripts:
