@@ -55,6 +55,12 @@ services:
     ports:
       - "8080:8080"
 
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    
 volumes:
   snode-config:
   snode-data:
