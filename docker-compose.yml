@@ -48,6 +48,8 @@ services:
 
   getpeers:
     image:  xrouterserviceexplorer/xcloud.getpeers.api:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     entrypoint: /opt/blockchain/start-getpeers.sh
     environment:
       COINS: "BLOCK"
