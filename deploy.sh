@@ -33,6 +33,9 @@ else
   echo "Not installing Docker..."
 fi
 
+# give all shell scripts execute rights
+find ./scripts -type f -iname "*.sh" -exec chmod +x {} \;
+
 read -p 'Your Public IP Address: ' PUBLIC_IP
 
 read -p 'Servicenode Name: ' SN_NAME
