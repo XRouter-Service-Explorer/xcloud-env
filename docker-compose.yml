@@ -1,4 +1,4 @@
-﻿version: "3.3"
+﻿version: "3.8"
 services:
   snode:
     image: blocknetdx/servicenode:latest
@@ -13,7 +13,9 @@ services:
       SN_KEY: "${SN_KEY}"
     volumes:
       - snode-config:/opt/blockchain/config
-      - snode-data:/opt/blockchain/data
+      - type: bind
+        source: "${BLOCKNET_DATADIR}"
+        target: /opt/blockchain/data
       - type: bind
         source: ./scripts
         target: /opt/blockchain
@@ -38,7 +40,9 @@ services:
       RPC_PASSWORD: "${RPC_PASSWORD}"
       SN_KEY: "${SN_KEY}"
     volumes:
-      - xrproxy-config:/opt/uwsgi/conf
+      - type: bind
+        source: ./uswgi-config
+        target: /opt/uwsgi/conf
       - xrproxy-nginx:/etc/nginx
       - type: bind
         source: ./scripts
@@ -69,7 +73,5 @@ networks:
 
 volumes:
   snode-config:
-  snode-data:
-  xrproxy-config:
   xrproxy-nginx:
   scripts:
