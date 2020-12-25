@@ -40,9 +40,7 @@ services:
       RPC_PASSWORD: "${RPC_PASSWORD}"
       SN_KEY: "${SN_KEY}"
     volumes:
-      - type: bind
-        source: ./uwsgi-config
-        target: /opt/uwsgi/conf
+      - xrproxy-config:/opt/uwsgi/conf
       - xrproxy-nginx:/etc/nginx
       - type: bind
         source: ./scripts
@@ -73,5 +71,6 @@ networks:
 
 volumes:
   snode-config:
+  xrproxy-config:
   xrproxy-nginx:
   scripts:
