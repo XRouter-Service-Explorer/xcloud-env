@@ -41,7 +41,7 @@ services:
       SN_KEY: "${SN_KEY}"
     volumes:
       - type: bind
-        source: ./uswgi-config
+        source: ./uwsgi-config
         target: /opt/uwsgi/conf
       - xrproxy-nginx:/etc/nginx
       - type: bind
