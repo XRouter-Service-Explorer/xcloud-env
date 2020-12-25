@@ -21,16 +21,17 @@ services:
         source: ./plugins
         target: /opt/blockchain/data/plugins
     ports:
-      - "41412"
-      - "41414"
+      - "41412:41412"
+      - "41414:41414"
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.31.0.2
 
   xr_proxy:
-    image: blocknetdx/exrproxy:latest
+    image: blocknetdx/exrproxy:0.7.9
     entrypoint: /opt/scripts/start-xrproxy.sh
     restart: unless-stopped
-    ports: 
+    ports:
       - "80:80"
     environment:
       RPC_USER: "${RPC_USER}"
@@ -43,29 +44,28 @@ services:
         source: ./scripts
         target: /opt/scripts
     networks:
-      - frontend
-      - backend
-
-  getpeers:
-    image:  xrouterserviceexplorer/xcloud.getpeers.api:latest
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    entrypoint: /opt/blockchain/start-getpeers.sh
-    environment:
-      COINS: "BLOCK"
-    volumes:
-      - type: bind
-        source: ./scripts
-        target: /opt/blockchain
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
+      frontend:
+      backend:
+        ipv4_address: 172.31.0.6
 
 networks:
   frontend:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.41.0.0/24
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"
+      com.docker.network.bridge.enable_ip_masquerade: "true"
   backend:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/24
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"
 
 volumes:
   snode-config:
