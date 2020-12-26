@@ -53,15 +53,16 @@ services:
   getpeers:
     image: xrouterserviceexplorer/xcloud.getpeers:latest
     entrypoint: /app/start-getpeers.sh
-    volumes:
-      - type: bind
-          source: ./scripts
-          target: /app
-    environment:
-      COIN_CONFIG: "${COIN_CONFIG}"
     restart: unless-stopped
     ports:
       - "8080:8080"
+    environment:
+      COIN_CONFIG: "${COIN_CONFIG}"
+    volumes:
+      - type: bind
+        source: ./scripts
+        target: /app
+    
 
 networks:
   frontend:
