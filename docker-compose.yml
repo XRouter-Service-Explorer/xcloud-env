@@ -52,6 +52,7 @@ services:
 
   getpeers:
     image: xrouterserviceexplorer/xcloud.getpeers:latest
+    entrypoint: start-getpeers.sh
     environment:
       COIN_CONFIG: ${COIN_CONFIG}
     restart: unless-stopped
