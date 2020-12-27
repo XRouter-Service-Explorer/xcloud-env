@@ -33,6 +33,9 @@ set-ph = RPC_BLOCK_USER=${RPC_USER}
 set-ph = RPC_BLOCK_PASS=${RPC_PASSWORD}
 set-ph = RPC_BLOCK_VER=2.0
 
+# Sample XCloud plugin configuration
+set-ph = URL_GetDailyPeerList_HOSTIP=getpeers
+set-ph = URL_GetDailyPeerList_PORT=8080
 
 EOL
 
