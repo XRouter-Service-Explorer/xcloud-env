@@ -13,7 +13,7 @@ cat > /app/appsettings.json << EOL
   "Kestrel": {
     "EndPoints": {
       "Http": {
-        "Url": "http://localhost:8080"
+        "Url": "http://0.0.0.0:8080"
       }
     }
   }
