@@ -2,7 +2,7 @@
 
 cat > /app/appsettings.json << EOL
 {
-  "CoinConfig": ${CoinConfig},
+  "CoinConfig": ${COIN_CONFIG},
   "Logging": {
     "LogLevel": {
       "Default": "Debug",
@@ -20,6 +20,8 @@ cat > /app/appsettings.json << EOL
 }
 
 EOL
+
+cat /app/appsettings.json
 
 echo "Starting GetPeers Container"
 
