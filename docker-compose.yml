@@ -52,7 +52,7 @@ services:
 
   getpeers:
     image: xrouterserviceexplorer/xcloud.getpeers:latest
-    entrypoint: /app/start-getpeers.sh
+    entrypoint: /app/scripts/start-getpeers.sh
     restart: unless-stopped
     ports:
       - "8080:8080"
@@ -61,7 +61,11 @@ services:
     volumes:
       - type: bind
         source: ./scripts
-        target: /app
+        target: /app/scripts
+    networks:
+      frontend:
+      backend:
+        ipv4_address: 172.31.0.4
     
 
 networks:

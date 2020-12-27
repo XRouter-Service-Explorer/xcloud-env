@@ -21,4 +21,6 @@ cat > /app/appsettings.json << EOL
 
 EOL
 
+echo "Starting GetPeers Container"
+
 dotnet XCloud.GetPeers.Api.dll
