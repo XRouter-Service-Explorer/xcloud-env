@@ -1,5 +1,6 @@
 # Enterprise Proxy XCloud Environment
 
+Work in progress: Tor configuration
 ## Usage
 Add the following config to environment variable
 ```
@@ -11,6 +12,8 @@ export RPC_USER="user"                      # Update with your rpc username
 export RPC_PASSWORD="password"              # Update with your rpc password
 export BLOCKNET_DATADIR="~/.blocknet"       # Update with your blocknet data directory path
 export ONION_ADDRESS="onionaddress"         # Update with your onion address
+
+```
 
 ## Tor
 ```
