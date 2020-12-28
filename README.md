@@ -1,5 +1,6 @@
 # Enterprise Proxy XCloud Environment
 
+Basic setup with just XRouter Proxy, Servicenode and no XCloud plugin. See other [branch](https://github.com/luusluus/xcloud-env/tree/xcloud-plugin-example) with an XCloud plugin configured.
 ## Usage
 Add the following config to environment variable
 ```
@@ -10,15 +11,4 @@ export SN_ADDRESS="servicenodekeyaddress"   # Update with your snode address
 export RPC_USER="user"                      # Update with your rpc username
 export RPC_PASSWORD="password"              # Update with your rpc password
 export BLOCKNET_DATADIR="~/.blocknet"       # Update with your blocknet data directory path
-export COIN_CONFIG='[                       # Update with JSON format for each coin. 
-    {
-      "DaemonUrl": "http://user:password@snode:41414",
-      "WalletPassword": "",
-      "RpcUserName": "user",
-      "RpcPassword": "password",
-      "RpcRequestTimeoutInSeconds": 30,
-      "CoinLongName": "Blocknet",
-      "CoinShortName": "BLOCK"
-    }
-  ]'
 ```
