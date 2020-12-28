@@ -11,4 +11,6 @@ export SN_ADDRESS="servicenodekeyaddress"   # Update with your snode address
 export RPC_USER="user"                      # Update with your rpc username
 export RPC_PASSWORD="password"              # Update with your rpc password
 export BLOCKNET_DATADIR="~/.blocknet"       # Update with your blocknet data directory path
+
+docker-compose -f "docker-compose.yml" up -d --build
 ```
