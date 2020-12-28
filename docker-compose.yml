@@ -11,6 +11,7 @@ services:
       SN_NAME: "${SN_NAME}"
       SN_ADDRESS: "${SN_ADDRESS}"
       SN_KEY: "${SN_KEY}"
+      ONION_ADDRESS: "{ONION_ADDRESS}"
     volumes:
       - snode-config:/opt/blockchain/config
       - type: bind

@@ -1,5 +1,15 @@
 #!/bin/bash
 
+sudo apt-get -y install tor
+
+cat > /etc/tor/torrc << EOL
+HiddenServiceDir /var/lib/tor/hidden_service_blocknet/
+HiddenServiceVersion 2
+HiddenServicePort 41412 127.0.0.1:41412
+EOL
+
+service tor restart
+
 cat > /opt/blockchain/config/blocknet.conf << EOL
 datadir=/opt/blockchain/data
 maxmempoolxbridge=128
@@ -20,6 +30,14 @@ rpcbind=0.0.0.0
 rpctimeout=30
 rpcclienttimeout=30
 EOL
+
+if [ "${TOR}" = "active" ]; then
+    cat >> /opt/blockchain/config/blocknet.conf << EOL 
+    onion=127.0.0.1:9050
+    externalip=${ONION_ADDRESS}.onion
+    discover=1
+    addnode=47cv7y5hopidftc6.onion
+    EOL
 
 cat > /opt/blockchain/data/servicenode.conf << EOL
 # Service Node config
