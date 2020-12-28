@@ -1,5 +1,8 @@
 # Enterprise Proxy XCloud Environment
 
+Example with a xcloud plugin. In this example the [GetPeers](https://github.com/XRouter-Service-Explorer/XCloud.GetPeers) plugin is used.
+
+`COIN_CONFIG` variable is needed as configuration for the plugin. In this case the Blocknet (BLOCK) daemon information is passed to the plugin.
 ## Usage
 Add the following config to environment variable
 ```
