@@ -41,7 +41,7 @@ cat > /opt/blockchain/data/xrouter.conf << EOL
 #! DNS and ip addresses are acceptable values.
 #! host=mynode.example.com
 #! host=208.67.222.222
-host=${PUBLIC_IP}
+host=${SERVER_NAME}
 wallets=BLOCK
 plugins=
 #! port is the tcpip port on the host that accepts xrouter connections.
@@ -50,6 +50,7 @@ plugins=
 #! port=80
 #! port=8080
 port=80
+tls=1
 #! maxfee is the maximum fee (in BLOCK) you're willing to pay on a single xrouter call
 #! 0 means you only want free calls
 maxfee=0
