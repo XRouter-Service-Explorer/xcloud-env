@@ -51,22 +51,6 @@ services:
       backend:
         ipv4_address: 172.31.0.6
 
-  getpeers:
-    image: xrouterserviceexplorer/xcloud.getpeers:latest
-    entrypoint: /app/scripts/start-getpeers.sh
-    restart: unless-stopped
-    ports:
-      - "8080:8080"
-    environment:
-      COIN_CONFIG: "${COIN_CONFIG}"
-    volumes:
-      - type: bind
-        source: ./scripts
-        target: /app/scripts
-    networks:
-      frontend:
-      backend:
-        ipv4_address: 172.31.0.4
     
 
 networks:
