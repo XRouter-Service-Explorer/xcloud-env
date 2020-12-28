@@ -13,6 +13,7 @@ export RPC_PASSWORD="password"              # Update with your rpc password
 export BLOCKNET_DATADIR="~/.blocknet"       # Update with your blocknet data directory path
 export ONION_ADDRESS="onionaddress"         # Update with your onion address
 
+docker-compose -f "docker-compose.yml" up -d --build
 ```
 
 ## Tor
