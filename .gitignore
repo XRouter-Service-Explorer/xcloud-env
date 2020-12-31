@@ -1,0 +1,6 @@
+.dockerignore
+.env
+.git
+.vscode
+*/bin
+*.pem
