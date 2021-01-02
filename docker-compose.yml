@@ -39,6 +39,8 @@ services:
       RPC_USER: "${RPC_USER}"
       RPC_PASSWORD: "${RPC_PASSWORD}"
       SN_KEY: "${SN_KEY}"
+      CORES: "${CORES}"
+      WORKER_CONNECTIONS: 1024
     volumes:
       - xrproxy-config:/opt/uwsgi/conf
       - xrproxy-nginx:/etc/nginx

@@ -2,8 +2,8 @@
 
 cat > /opt/uwsgi/conf/uwsgi.ini << EOL
 [uwsgi]
-processes = 4
-threads = 4
+processes = ${CORES}
+threads = 2
 buffer-size = 32768
 
 # Place your Service Node private key here (this is not a wallet private key!)
@@ -33,6 +33,62 @@ set-ph = RPC_BLOCK_USER=${RPC_USER}
 set-ph = RPC_BLOCK_PASS=${RPC_PASSWORD}
 set-ph = RPC_BLOCK_VER=2.0
 
+EOL
+
+cat > /etc/nginx/nginx.conf << EOL
+user nginx;                                                                     
+worker_processes ${CORES};
+                                                                                
+error_log  /var/log/nginx/error.log warn;                                       
+pid        /var/run/nginx.pid;                                                  
+                                                                                
+events {                                                                        
+    worker_connections ${WORKER_CONNECTIONS};
+}                                                                               
+                                                                                
+http {                                                                          
+    include       /etc/nginx/mime.types;                                        
+    default_type  application/octet-stream;                                     
+    keepalive_timeout  65;                                                      
+                                                                                
+    log_format  main '\$remote_addr - \$remote_user [\$time_local] "\$request" '
+                          '\$status \$body_bytes_sent "\$http_referer" '
+                          '"\$http_user_agent" "\$http_x_forwarded_for"';
+                                                                                
+    access_log  /var/log/nginx/access.log  main;                                
+                                                                                
+    upstream uwsgicluster {                                                     
+        server 127.0.0.1:8080;                                                  
+    }                                                                           
+                                                                                
+    server {                                                                    
+        listen 80;
+        #listen              443 ssl;
+        #server_name         www.example.com;
+        #ssl_certificate     www.example.com.crt;
+        #ssl_certificate_key www.example.com.key;  
+
+        # Proxying connections to application servers 
+        location / {                                                            
+                                                                                
+        }                                                                       
+                                                                                
+        include /etc/nginx/conf.d/xcloud/*.conf;                                
+                                                                                
+        location ~ ^/xrs?/.*$ {                                                 
+            root               /opt/uwsgi;                                      
+            include            uwsgi_params;                                    
+            uwsgi_pass         uwsgicluster;                                    
+            proxy_redirect     off;                                             
+            proxy_set_header   Host \$host;                                      
+            proxy_set_header   X-Real-IP \$remote_addr;                          
+            proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;      
+            proxy_set_header   X-Forwarded-Host \$server_name;                   
+        }                                                                       
+    }                                                                           
+                                                                                
+    include /etc/nginx/conf.d/*.conf;                                           
+}                  
 EOL
 
 # ensure supervisord runs at pid1
