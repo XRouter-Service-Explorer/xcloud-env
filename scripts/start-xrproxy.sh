@@ -2,8 +2,8 @@
 
 cat > /opt/uwsgi/conf/uwsgi.ini << EOL
 [uwsgi]
-processes = 4
-threads = 4
+processes = ${CORES}
+threads = 2
 buffer-size = 32768
 
 # Place your Service Node private key here (this is not a wallet private key!)
@@ -37,13 +37,13 @@ EOL
 
 cat > /etc/nginx/nginx.conf << EOL
 user nginx;                                                                     
-worker_processes 8;
+worker_processes ${CORES};
                                                                                 
 error_log  /var/log/nginx/error.log warn;                                       
 pid        /var/run/nginx.pid;                                                  
                                                                                 
 events {                                                                        
-    worker_connections 2048;
+    worker_connections ${WORKER_CONNECTIONS};
 }                                                                               
                                                                                 
 http {                                                                          
@@ -62,11 +62,13 @@ http {
     }                                                                           
                                                                                 
     server {                                                                    
-        listen 443 ssl;                                                              
-        server_name         ${SERVER_NAME};
+        #listen 80;
+        listen              443 ssl;
+        server_name         api.crosschaintools.com
         ssl_certificate     /opt/uwsgi/conf/cert.pem;
         ssl_certificate_key /opt/uwsgi/conf/key.pem;  
-
+        
+        # Proxying connections to application servers 
         location / {                                                            
                                                                                 
         }                                                                       
