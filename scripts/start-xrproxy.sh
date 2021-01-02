@@ -64,10 +64,10 @@ http {
     server {                                                                    
         #listen 80;
         listen              443 ssl;
-        server_name         api.crosschaintools.com
+        server_name         ${SERVER_NAME}
         ssl_certificate     /opt/uwsgi/conf/cert.pem;
         ssl_certificate_key /opt/uwsgi/conf/key.pem;  
-        
+
         # Proxying connections to application servers 
         location / {                                                            
                                                                                 
