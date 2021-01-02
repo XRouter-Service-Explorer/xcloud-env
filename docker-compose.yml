@@ -40,6 +40,8 @@ services:
       RPC_PASSWORD: "${RPC_PASSWORD}"
       SN_KEY: "${SN_KEY}"
       SERVER_NAME: "${SERVER_NAME}"
+      CORES: "${CORES}"
+      WORKER_CONNECTIONS: 1024
     volumes:
       - xrproxy-nginx:/etc/nginx
       - type: bind
