@@ -43,7 +43,7 @@ cat > /opt/blockchain/data/xrouter.conf << EOL
 #! host=208.67.222.222
 host=${SERVER_NAME}
 wallets=BLOCK
-plugins=
+plugins=GetDailyPeerList
 #! port is the tcpip port on the host that accepts xrouter connections.
 #! port will default to the default blockchain port (e.g. 41412), examples:
 #! port=41412

@@ -13,8 +13,19 @@ export SN_ADDRESS="servicenodekeyaddress"   # Update with your snode address
 export RPC_USER="user"                      # Update with your rpc username
 export RPC_PASSWORD="password"              # Update with your rpc password
 export BLOCKNET_DATADIR="~/.blocknet"       # Update with your blocknet data directory path
+export CORES="$(nproc --all)"
 
-export CORES="$(nproc --all)"               
+export COIN_CONFIG='[                       # Update with JSON format for each coin. 
+    {
+      "DaemonUrl": "http://user:password@snode:41414",
+      "WalletPassword": "",
+      "RpcUserName": "user",
+      "RpcPassword": "password",
+      "RpcRequestTimeoutInSeconds": 30,
+      "CoinLongName": "Blocknet",
+      "CoinShortName": "BLOCK"
+    }
+  ]'
 
 docker-compose -f "docker-compose.yml" up -d --build
 ```
