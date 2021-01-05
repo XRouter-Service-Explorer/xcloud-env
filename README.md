@@ -1,6 +1,6 @@
 # Enterprise Proxy XCloud Environment
 
-Basic setup with just XRouter Proxy with CloudFlare **SSL/TLS**, Servicenode and no XCloud plugin. See other [branch](https://github.com/luusluus/xcloud-env/tree/xcloud-plugin-example) with an XCloud plugin configured.
+Basic setup with just XRouter Proxy with CloudFlare **SSL/TLS**, Servicenode and XCloud plugin. See other [branch](https://github.com/luusluus/xcloud-env/tree/xcloud-plugin-example) with an XCloud plugin configured.
 
 ## CloudFlare certificates
 ## Usage
